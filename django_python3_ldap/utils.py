@@ -6,7 +6,7 @@ import re
 import binascii
 import itertools
 
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 from django.utils.module_loading import import_string
 
 from django_python3_ldap.conf import settings
@@ -27,8 +27,8 @@ def clean_ldap_name(name):
     """
     return re.sub(
         r'[^a-zA-Z0-9 _\-.@:*]',
-        lambda c: "\\" + force_text(binascii.hexlify(c.group(0).encode("latin-1", errors="ignore"))).upper(),
-        force_text(name),
+        lambda c: "\\" + force_str(binascii.hexlify(c.group(0).encode("latin-1", errors="ignore"))).upper(),
+        force_str(name),
     )
 
 
